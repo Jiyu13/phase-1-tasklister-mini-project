@@ -12,10 +12,14 @@ document.addEventListener("DOMContentLoaded", () => {
 
 
 function buildTodoList(todo) {
-  const li = document.createElement("li");
-  li.textContent = todo;
+  let deleteBtn = document.createElement("button");
+  deleteBtn.textContent = "X";
+
+  let li = document.createElement("li");
+  li.textContent = ` ${todo} `;
 
   const tasks = document.querySelector("#list #tasks")
   tasks.appendChild(li)
   
 } 
+
