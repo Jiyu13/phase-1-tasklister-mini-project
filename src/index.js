@@ -5,12 +5,15 @@ document.addEventListener("DOMContentLoaded", () => {
   form.addEventListener("submit", (event) => {
     event.preventDefault();
     const inputValue = event.target["new-task-description"].value;
-    buildTodoList(inputValue)
+    buildTodoList(inputValue);
   })
 
 });
 
 
 function buildTodoList(todo) {
+  let p = document.createElement("p");
+  p.textContent = todo;
   
+
 } 
