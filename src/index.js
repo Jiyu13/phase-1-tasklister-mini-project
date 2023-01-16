@@ -14,12 +14,22 @@ document.addEventListener("DOMContentLoaded", () => {
 function buildTodoList(todo) {
   let deleteBtn = document.createElement("button");
   deleteBtn.textContent = "X";
+  deleteBtn.addEventListener("click", (event) => handleDelete(event));//
 
   let li = document.createElement("li");
   li.textContent = ` ${todo} `;
+  
+
+  li.appendChild(deleteBtn);
 
   const tasks = document.querySelector("#list #tasks")
   tasks.appendChild(li)
   
 } 
+
+function handleDelete(e) {
+  e.target.parentNode.remove(); //
+}
+
+
 
