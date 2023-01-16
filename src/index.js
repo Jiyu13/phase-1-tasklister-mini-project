@@ -16,5 +16,6 @@ function buildTodoList(todo) {
   li.textContent = todo;
 
   const tasks = document.querySelector("#list #tasks")
+  tasks.appendChild(li)
   
 } 
