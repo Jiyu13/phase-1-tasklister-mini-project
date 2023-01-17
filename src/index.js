@@ -8,13 +8,19 @@ document.addEventListener("DOMContentLoaded", () => {
     const inputValue = event.target["new-task-description"].value;
     const username = document.querySelector("#new-task-user").value
     const dateDue = document.querySelector("#date-due").value
+
+    // select current option
+    const taskColor = document.querySelector("select")
+    console.log(taskColor.options[taskColor.selectedIndex].value)
+
     buildTodoList(inputValue, username, dateDue);
     console.log(inputValue)
     console.log(username)
     console.log(dateDue)
   })
 
-  addInputFields(form)
+  addInputFields(form);
+  dropDown(form);
 
 });
 
@@ -63,7 +69,29 @@ function addInputFields(form) {
 
   // prepend the new added fields to form
   form.prepend(userLabel, userInput, dateLabel, dateInput);
-
 }
 
 
+// add dropdown
+function dropDown(form) {
+  let select = document.createElement("select");
+
+  let high = document.createElement("option");
+  high.setAttribute("value", "high")
+  high.textContent = "High"
+  high.style.backgroundColor  = "red"
+
+  let medium = document.createElement("option")
+  medium.setAttribute("value", "medium")
+  medium.textContent = "Medium"
+  medium.style.backgroundColor  = "yellow"
+
+  let low = document.createElement("option")
+  low.setAttribute("value", "low")
+  low.textContent = "Low"
+  low.style.backgroundColor  = "green"
+
+  select.append(high, medium, low)
+  form.insertBefore(select, form.querySelector("input[type=submit]"))
+
+}
