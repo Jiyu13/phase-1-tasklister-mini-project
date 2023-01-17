@@ -3,26 +3,29 @@ document.addEventListener("DOMContentLoaded", () => {
   
   const form = document.querySelector("#create-task-form")
 
-  addInputFields(form) //
-
   form.addEventListener("submit", (event) => {
     event.preventDefault();
     const inputValue = event.target["new-task-description"].value;
-    buildTodoList(inputValue);
+    const username = document.querySelector("#new-task-user").value
+    const dateDue = document.querySelector("#date-due").value
+    buildTodoList(inputValue, username, dateDue);
+    console.log(inputValue)
+    console.log(username)
+    console.log(dateDue)
   })
+
+  addInputFields(form)
 
 });
 
 
-function buildTodoList(todo) {
+function buildTodoList(todo, name, date) {
   let deleteBtn = document.createElement("button");
   deleteBtn.textContent = "X";
   deleteBtn.addEventListener("click", (event) => handleDelete(event));
 
   let li = document.createElement("li");
-  li.textContent = ` ${todo} `;
-  
-
+  li.innerHTML = `Todo: ${todo}<br>By: ${name}<br>Due by: ${date}<br>`
   li.appendChild(deleteBtn);
 
   const tasks = document.querySelector("#list #tasks")
@@ -36,39 +39,30 @@ function handleDelete(e) {
 
 
 function addInputFields(form) {
-  let createDiv = document.createElement("div");
-  createDiv.innerHTML = `
-  <br>
-  <label for="new-task-user">Username: </label>
-  <input id="new-task-user" type="text" placeholder="username">
-  <br>
-  <br>
-  <label for="date-due">Date Due: </label>
-  <input id="date-due" type="text" placeholder="mm/dd/yyyy">
-  <br>
-  <br>
-  `
-  form.appendChild(createDiv);
-
+  const taskInput = form.querySelector("#new-task-description");
   const submitBtn = form.querySelector("input[type=submit]");
-  form.insertBefore(createDiv, submitBtn)
-  
 
-  // let user = document.createElement("label");
-  // user.for = "new-task-user";
-  // user.textContent = "Username:";
+  // create user label and input
+  let userLabel = document.createElement("label");
+  userLabel.setAttribute("for", "new-task-user");
+  userLabel.textContent = "Username: ";
 
-  // let input = document.createElement("input");
-  // input.id = "new-task-user";
-  // input.placeholder = "username";
 
-  // const submitBtn = form.querySelector("input[type=submit]")
+  let userInput = document.createElement("input");
+  userInput.setAttribute("id", "new-task-user");
+  userInput.placeholder = "Username"
 
-  // form.insertBefore(user, submitBtn);
-  // form.insertBefore(input, submitBtn);
+  // create date-due label and input
+  let dateLabel = document.createElement("label");
+  dateLabel.setAttribute("for", "date-due");
+  dateLabel.textContent = "Date Due: ";
 
-  
-  console.log(submitBtn)
+  let dateInput = document.createElement("input");
+  dateInput.setAttribute("id", "date-due");
+  dateInput.placeholder = "mm/dd/yyyy";
+
+  // prepend the new added fields to form
+  form.prepend(userLabel, userInput, dateLabel, dateInput);
 
 }
 
