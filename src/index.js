@@ -10,10 +10,11 @@ document.addEventListener("DOMContentLoaded", () => {
     const dateDue = document.querySelector("#date-due").value
 
     // select current option
-    const taskColor = document.querySelector("select")
-    console.log(taskColor.options[taskColor.selectedIndex].value)
+    const select = document.querySelector("select")
+    const selectedOption = select.options[select.selectedIndex].value
+    console.log(selectedOption)
 
-    buildTodoList(inputValue, username, dateDue);
+    buildTodoList(inputValue, username, dateDue, selectedOption);
     console.log(inputValue)
     console.log(username)
     console.log(dateDue)
@@ -25,7 +26,7 @@ document.addEventListener("DOMContentLoaded", () => {
 });
 
 
-function buildTodoList(todo, name, date) {
+function buildTodoList(todo, name, date, option) {
   let deleteBtn = document.createElement("button");
   deleteBtn.textContent = "X";
   deleteBtn.addEventListener("click", (event) => handleDelete(event));
@@ -33,6 +34,9 @@ function buildTodoList(todo, name, date) {
   let li = document.createElement("li");
   li.innerHTML = `Todo: ${todo}<br>By: ${name}<br>Due by: ${date}<br>`
   li.appendChild(deleteBtn);
+  const color = optionColors(option);
+  li.style.backgroundColor = color;
+  
 
   const tasks = document.querySelector("#list #tasks")
   tasks.appendChild(li)
@@ -94,4 +98,15 @@ function dropDown(form) {
   select.append(high, medium, low)
   form.insertBefore(select, form.querySelector("input[type=submit]"))
 
+}
+
+
+function optionColors(option) {
+  if (option === "high") {
+    return "red";
+  } else if (option === "medium") {
+    return "yellow";
+  } else {
+    return "green"
+  }
 }
